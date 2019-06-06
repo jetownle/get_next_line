@@ -6,7 +6,7 @@
 /*   By: jetownle <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/24 23:43:06 by jetownle          #+#    #+#             */
-/*   Updated: 2019/06/04 01:30:24 by jetownle         ###   ########.fr       */
+/*   Updated: 2019/06/06 06:03:07 by jetownle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,13 @@
 
 int	get_next_line(const int fd, char **line)
 {
-	char		buf[BUFF_SIZE + 1];
-	int			ret;
 	static char *s[4096];
-	int			i;
+	char		buf[BUFF_SIZE + 1];
 	char		*tmp;
+	int			ret;
+	int			i;
 
+	i = -1;
 	if (fd < 0 || line == NULL || read(fd, buf, 0) < 0)
 		return (-1);
 	while ((ret = read(fd, buf, BUFF_SIZE)))
@@ -33,7 +34,10 @@ int	get_next_line(const int fd, char **line)
 	}
 	if (ret < BUFF_SIZE && !ft_strlen(s[fd]))
 		return (0);
-	i = ft_copyuntil(line, s[fd], '\n');
+	while (s[fd][++i])
+		if (s[fd][i] == '\n')
+			break ;
+	*line = ft_strndup(s[fd], i);
 	(i < (int)ft_strlen(s[fd])) ? s[fd] += (i + 1) : ft_strclr(s[fd]);
 	return (1);
 }
