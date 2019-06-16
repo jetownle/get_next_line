@@ -6,7 +6,7 @@
 /*   By: jetownle <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/24 23:43:06 by jetownle          #+#    #+#             */
-/*   Updated: 2019/06/14 21:51:49 by jetownle         ###   ########.fr       */
+/*   Updated: 2019/06/15 20:23:44 by jetownle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static int	output(char **s, char **line, int ret, int fd)
 
 int			get_next_line(const int fd, char **line)
 {
-	static char	*s[4096];
+	static char	*s[1024];
 	char		buf[BUFF_SIZE + 1];
 	char		*tmp;
 	int			ret;
